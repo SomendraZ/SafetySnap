@@ -91,14 +91,17 @@ exports.getImages = async (req, res) => {
 
   const { limit = 10, offset = 0, label, from, to } = req.query;
   const filter = { userId: req.user._id };
+
   if (label) filter["detections.label"] = label;
   if (from || to) filter.uploadedAt = {};
   if (from) filter.uploadedAt.$gte = new Date(from);
   if (to) filter.uploadedAt.$lte = new Date(to);
 
   const items = await Image.find(filter)
+    .sort({ uploadedAt: -1 }) // sort by newest first
     .skip(Number(offset))
     .limit(Number(limit));
+
   const next_offset =
     items.length < limit ? null : Number(offset) + Number(limit);
 
