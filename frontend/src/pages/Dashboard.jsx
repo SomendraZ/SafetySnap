@@ -45,9 +45,16 @@ export default function Dashboard() {
     if (nextOffset !== null) setOffset(nextOffset);
   };
 
-  if (loading) return <p className="p-4 text-gray-200">Loading...</p>;
+  if (loading)
+    return (
+      <p className="p-4  bg-gray-700 min-h-screen text-gray-100">Loading...</p>
+    );
   if (images.length === 0)
-    return <p className="p-4 text-gray-200">No images uploaded yet.</p>;
+    return (
+      <p className="p-4  bg-gray-700 min-h-screen text-gray-100">
+        No images uploaded yet.
+      </p>
+    );
 
   return (
     <div className="p-4 bg-gray-700 min-h-screen text-gray-100">
